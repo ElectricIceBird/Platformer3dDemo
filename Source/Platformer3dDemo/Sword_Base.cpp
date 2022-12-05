@@ -2,12 +2,14 @@
 
 
 #include "Sword_Base.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 ASword_Base::ASword_Base()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 	
 
 }
@@ -18,7 +20,6 @@ ASword_Base::ASword_Base()
 void ASword_Base::BeginPlay()
 {
 	Super::BeginPlay();
-
 	if(TheOwner)
 	{
 		UE_LOG(LogTemp,Warning,TEXT(" Is Owner"));
@@ -32,11 +33,11 @@ void ASword_Base::Tick(float DeltaTime)
 
 }
 
-void ASword_Base::BeginBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+ void ASword_Base::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor == TheOwner)
+	if(OtherActor->ActorHasTag("Enemy"))
 	{
-		SetActorEnableCollision(false);
+		UE_LOG(LogTemp,Warning,TEXT(" Is Owner"));
 	}
 }

@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Sword_Base.generated.h"
 
+
 UCLASS()
 class PLATFORMER3DDEMO_API ASword_Base : public AActor
 {
@@ -19,12 +20,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	AActor * TheOwner = GetOwner();
-	
+
 	UFUNCTION()
-	void
-	BeginBoxOverlap(UPrimitiveComponent*OverlappedComponent,
-		AActor*OtherActor,
-		UPrimitiveComponent*OtherComp,int32 OtherBodyIndex,bool bFromSweep,const FHitResult &SweepResult);
+	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult& SweepResult);
 
 protected:
 	// Called when the game starts or when spawned
