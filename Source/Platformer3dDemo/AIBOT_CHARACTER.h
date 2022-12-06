@@ -14,7 +14,8 @@ class PLATFORMER3DDEMO_API AAIBOT_CHARACTER : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AAIBOT_CHARACTER();
-
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	class AWaypoint* NextWayPoint;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
