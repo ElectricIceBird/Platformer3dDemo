@@ -131,7 +131,7 @@ void AZU::Attack()
 	if(AttackAnim)
 	{
 		
-		PlayAnimMontage(AttackAnim,3,NAME_None);	
+		PlayAnimMontage(AttackAnim,2,NAME_None);	
 	}
 }	
 void AZU::RestartGame()

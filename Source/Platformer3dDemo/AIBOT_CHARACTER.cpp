@@ -13,6 +13,23 @@ AAIBOT_CHARACTER::AAIBOT_CHARACTER()
     GetCharacterMovement()->RotationRate= FRotator(0.0f,600.0f,0.0f);
 }
 
+void AAIBOT_CHARACTER::Damage(float attack)
+{
+	if(HurtAnim)
+	{
+		PlayAnimMontage(HurtAnim,1,NAME_None);
+		health-=attack;
+	}
+}
+
+void AAIBOT_CHARACTER::Delay()
+{
+	UE_LOG(LogTemp,Warning,TEXT("OW"));
+
+	FTimerHandle TDelay;
+	GetWorld()->GetTimerManager().SetTimer(TDelay,this,&AAIBOT_CHARACTER::Delay,100.0f,false);
+}
+
 // Called when the game starts or when spawned
 void AAIBOT_CHARACTER::BeginPlay()
 {
@@ -24,7 +41,19 @@ void AAIBOT_CHARACTER::BeginPlay()
 void AAIBOT_CHARACTER::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(health<=0)
+	{
+		if(DeathAnim)
+		{
+			PlayAnimMontage(DeathAnim,1,NAME_None);
+			
+		Delay();
+		}
+		UE_LOG(LogTemp,Warning,TEXT("DEATH!!!"));
+		Delay();
 
+		Destroy();
+	}
 }
 
 // Called to bind functionality to input

@@ -3,29 +3,31 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "AIBOT_CHARACTER.generated.h"
+#include "Components/BoxComponent.h"
+#include "GameFramework/Pawn.h"
+#include "DamageBox.generated.h"
 
 UCLASS()
-class PLATFORMER3DDEMO_API AAIBOT_CHARACTER : public ACharacter
+class PLATFORMER3DDEMO_API ADamageBox : public APawn
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
-	AAIBOT_CHARACTER();
+	// Sets default values for this pawn's properties
+	ADamageBox();
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	USceneComponent* Root;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	class AWaypoint* NextWayPoint;
+	UBoxComponent * Box;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float health;
-	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = Animations)
-	UAnimMontage *DeathAnim;
-	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = Animations)
-	UAnimMontage *HurtAnim;
+	float damg;
 	UFUNCTION()
-	void Damage(float attack);
-	UFUNCTION()
-	void Delay();
+	void OnEnter(UPrimitiveComponent*OverlapComponent,
+		AActor*OtherActor,UPrimitiveComponent *OtherComponent,
+		int32 OtherBodyIndex,bool bFromSweep,const FHitResult &Sweep);
+		
+	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

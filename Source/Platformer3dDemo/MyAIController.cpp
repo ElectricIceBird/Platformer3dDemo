@@ -2,9 +2,10 @@
 
 
 #include "MyAIController.h"
-
 #include "AIBOT_CHARACTER.h"
 #include "Waypoint.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "ZU.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 AMyAIController::AMyAIController()
@@ -52,9 +53,19 @@ void AMyAIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	AAIBOT_CHARACTER *Chara = Cast<AAIBOT_CHARACTER>(GetPawn());
-	if(Chara->NextWayPoint != nullptr)
+	if(DistancetoPlayer>AISightRadius)
+	{
+		bIsPlayerDetected=false;
+	}
+	if(Chara->NextWayPoint != nullptr && bIsPlayerDetected==false)
 	{
 		MoveToActor(Chara->NextWayPoint,5.0f);
+	}else if (bIsPlayerDetected ==true)
+	{
+		AZU *Player = Cast<AZU>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
+		// UE_LOG(LogTemp,Warning,TEXT("AYO STOOOP"));
+
+		MoveToActor(Player,5.0f);
 	}
 }
 
@@ -69,5 +80,11 @@ FRotator AMyAIController::GetControlRotation() const
 
 void AMyAIController::OnPawnDetected(const TArray<AActor*>& DetectedPawns)
 {
-	
+	for(size_t i = 0; i<DetectedPawns.Num(); i++)
+	{
+		DistancetoPlayer = GetPawn()-> GetDistanceTo(DetectedPawns[i]);
+		// UE_LOG(LogTemp,Warning,TEXT("Distance: %f"),DistancetoPlayer);
+
+	}
+	bIsPlayerDetected = true;
 }

@@ -33,4 +33,8 @@ public:
 	float AIFieldOfView = 90.0f;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category=AI)
 	class UAISenseConfig_Sight * SightConfig;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category=AI)
+bool bIsPlayerDetected =false;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category=AI)
+	float DistancetoPlayer = 0;
 };
