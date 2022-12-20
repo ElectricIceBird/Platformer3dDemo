@@ -37,4 +37,5 @@ public:
 bool bIsPlayerDetected =false;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category=AI)
 	float DistancetoPlayer = 0;
+	
 };

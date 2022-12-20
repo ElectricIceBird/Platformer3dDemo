@@ -22,6 +22,8 @@ public:
 	UAnimMontage *DeathAnim;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = Animations)
 	UAnimMontage *HurtAnim;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = Animations)
+	UAnimMontage *AttackAnim;
 	UFUNCTION()
 	void Damage(float attack);
 	UFUNCTION()

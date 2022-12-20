@@ -56,6 +56,7 @@ void AMyAIController::Tick(float DeltaSeconds)
 	if(DistancetoPlayer>AISightRadius)
 	{
 		bIsPlayerDetected=false;
+	
 	}
 	if(Chara->NextWayPoint != nullptr && bIsPlayerDetected==false)
 	{
@@ -66,6 +67,7 @@ void AMyAIController::Tick(float DeltaSeconds)
 		// UE_LOG(LogTemp,Warning,TEXT("AYO STOOOP"));
 
 		MoveToActor(Player,5.0f);
+		
 	}
 }
 

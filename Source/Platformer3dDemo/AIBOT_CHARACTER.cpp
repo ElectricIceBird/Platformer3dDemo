@@ -3,7 +3,7 @@
 
 #include "AIBOT_CHARACTER.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "MyAIController.h"
 // Sets default values
 AAIBOT_CHARACTER::AAIBOT_CHARACTER()
 {
@@ -47,13 +47,13 @@ void AAIBOT_CHARACTER::Tick(float DeltaTime)
 		{
 			PlayAnimMontage(DeathAnim,1,NAME_None);
 			
-		Delay();
 		}
 		UE_LOG(LogTemp,Warning,TEXT("DEATH!!!"));
 		Delay();
 
 		Destroy();
 	}
+	
 }
 
 // Called to bind functionality to input
